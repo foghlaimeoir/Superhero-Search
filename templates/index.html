@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Superhero Search</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.0/slimselect.min.css" rel="stylesheet"></link>
+    <link rel= "stylesheet" type= "text/css" href= "{{url_for('static', filename='styles/style.css') }}"></link>
+
+</head>
+<body>
+    <div id="search-bar">
+        <img id="title-image" alt="Superhero Search Logo" src="/static/images/searchLogo.png"></img>
+        <h1>Choose your favourite Marvel character(s) and the comics in which they appear will display below!</h1>
+        <form>
+            <select id="multiple" multiple>
+                {% block main %}
+                {% for character in characters %}
+                <option value="{{ character['id'] }}">
+                    {{ character['name']}}
+                </option>
+                {% endfor %}
+                {% endblock %}
+            </select>
+            <button type="button">Search</button>
+        </form>
+    </div>
+
+
+    <div id="cards-container">
+        <div id="grid"></div>
+        <div id="end-of-page"></div>
+        <div id="loader" style="display:none"></div>
+
+    </div>
+
+    <template id="blank-card">
+          <div class="flip-card">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <img class="comic-cover">
+                </div>
+                <div class="flip-card-back">
+                  <h1 class="title"></h1>
+                  <h2 class="date"></h2>
+                    <p class="creators"></p>
+                    <a class="marvel-link" href="">READ MORE</a>
+                </div>
+              </div>
+          </div>
+    </template>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.27.0/slimselect.min.js"></script>
+    <script src="{{url_for('static', filename='js/comics.js')}}"></script>
+
+</body>
+
+<footer>Data provided by Marvel. © 2021 MARVEL</footer>
+</html>
+
+
